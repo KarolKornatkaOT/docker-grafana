@@ -1,6 +1,7 @@
 # Grafana Docker image
 
 This project builds a Docker image with the latest master build of Grafana.
+Version of package can be changed in Dockerfile by changing link to deb file.
 
 ## Running your Grafana container
 
@@ -27,8 +28,6 @@ docker run \
   -e "GF_SECURITY_ADMIN_PASSWORD=secret" \
   grafana/grafana
 ```
-
-More information in the grafana configuration documentation: http://docs.grafana.org/installation/configuration/
 
 ## Grafana container with persistent storage (recommended)
 
@@ -68,40 +67,3 @@ docker run \
   --name grafana \
   grafana/grafana:2.6.0
 ```
-
-## Configuring AWS credentials for CloudWatch support
-
-```
-docker run \
-  -d \
-  -p 3000:3000 \
-  --name=grafana \
-  -e "GF_AWS_PROFILES=default" \
-  -e "GF_AWS_default_ACCESS_KEY_ID=YOUR_ACCESS_KEY" \
-  -e "GF_AWS_default_SECRET_ACCESS_KEY=YOUR_SECRET_KEY" \
-  -e "GF_AWS_default_REGION=us-east-1" \
-  grafana/grafana
-```
-
-You may also specify multiple profiles to `GF_AWS_PROFILES` (e.g.
-`GF_AWS_PROFILES=default another`).
-
-Supported variables:
-
-- `GF_AWS_${profile}_ACCESS_KEY_ID`: AWS access key ID (required).
-- `GF_AWS_${profile}_SECRET_ACCESS_KEY`: AWS secret access  key (required).
-- `GF_AWS_${profile}_REGION`: AWS region (optional).
-
-## Changelog
-
-### v4.2.0
-* Plugins are now installed into ${GF_PATHS_PLUGINS}
-* Building the container now requires a full url to the deb package instead of just version
-* Fixes bug caused by installing multiple plugins
-
-### v4.0.0-beta2
-* Plugins dir (`/var/lib/grafana/plugins`) is no longer a separate volume
-
-### v3.1.1
-* Make it possible to install specific plugin version https://github.com/grafana/grafana-docker/issues/59#issuecomment-260584026
-
