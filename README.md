@@ -8,7 +8,7 @@ Version of package can be changed in Dockerfile by changing link to deb file.
 Start your container binding the external port `3000`.
 
 ```
-docker run -d --name=grafana -p 3000:3000 grafana/grafana
+docker run -d --name=grafana -p 3000:3000  oberthur/docker-grafana
 ```
 
 Try it out, default admin user is admin/admin.
@@ -26,8 +26,8 @@ docker run \
   --name=grafana \
   -e "GF_SERVER_ROOT_URL=http://grafana.server.name" \
   -e "GF_SECURITY_ADMIN_PASSWORD=secret" \
-  grafana/grafana
-```
+ oberthur/docker-grafana
+ ```
 
 ## Grafana container with persistent storage (recommended)
 
@@ -41,7 +41,7 @@ docker run \
   -p 3000:3000 \
   --name=grafana \
   --volumes-from grafana-storage \
-  grafana/grafana
+   oberthur/docker-grafana
 ```
 
 ## Installing plugins for Grafana 3
@@ -54,16 +54,5 @@ docker run \
   -p 3000:3000 \
   --name=grafana \
   -e "GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource" \
-  grafana/grafana
-```
-
-## Running specific version of Grafana
-
-```
-# specify right tag, e.g. 2.6.0 - see Docker Hub for available tags
-docker run \
-  -d \
-  -p 3000:3000 \
-  --name grafana \
-  grafana/grafana:2.6.0
+  oberthur/docker-grafana
 ```
